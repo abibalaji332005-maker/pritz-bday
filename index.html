@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRITZ'S BIZARRE COUNTDOWN ★</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Playfair+Display:ital,wght@0,700;1,700&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-light: #ffd6e8;
+      --pink-hot: #ff4d94;
+      --plum-dark: #180c14;
+      --red-death: #d90429;
+      --cream: #fff8fa;
+      --jojo-gold: #ffd166;
+      --jojo-purple: #5a189a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Space Mono', monospace;
+      color: var(--plum-dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-color: #ffe6f0;
+      background-image:
+        linear-gradient(90deg, rgba(255, 77, 148, 0.14) 50%, transparent 50%),
+        linear-gradient(rgba(255, 77, 148, 0.14) 50%, transparent 50%);
+      background-size: 36px 36px;
+      padding: 20px 14px 60px;
+    }
+    .bg-stickers .sticker {
+      position: fixed;
+      font-size: 2rem;
+      opacity: 0.25;
+      pointer-events: none;
+      z-index: 0;
+      animation: floaty 6s ease-in-out infinite;
+    }
+    .s1 { top: 8%; left: 6%; color: var(--red-death); }
+    .s2 { top: 20%; right: 8%; font-weight: 900; color: var(--jojo-purple); animation-delay: 1s; }
+    .s3 { top: 50%; left: 4%; animation-delay: 2s; }
+    .s4 { bottom: 18%; right: 6%; animation-delay: 1.5s; }
+    .s5 { bottom: 8%; left: 12%; font-weight: 900; color: var(--red-death); animation-delay: 3s; }
+    .s6 { top: 70%; right: 12%; color: var(--pink-hot); }
+    @keyframes floaty {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(8deg); }
+    }
+    .container {
+      max-width: 620px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .scrapbook-header {
+      background: var(--cream);
+      border: 3px solid var(--plum-dark);
+      box-shadow: 6px 6px 0 var(--pink-hot);
+      padding: 24px 18px;
+      text-align: center;
+      position: relative;
+      transform: rotate(-1deg);
+    }
+    .tape {
+      width: 90px;
+      height: 22px;
+      background: rgba(255, 182, 193, 0.75);
+      border: 1px dashed var(--pink-hot);
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%) rotate(2deg);
+    }
+    .mini-tag {
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      background: var(--plum-dark);
+      color: var(--pink-light);
+      display: inline-block;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      line-height: 1.1;
+      color: var(--plum-dark);
+    }
+    .title span { color: var(--pink-hot); font-style: italic; }
+    .subtitle { margin-top: 10px; font-size: 0.85rem; color: #5c3a4d; }
+    .retro-window {
+      background: var(--cream);
+      border: 3px solid var(--plum-dark);
+      box-shadow: 6px 6px 0 var(--plum-dark);
+    }
+    .retro-window.dark-punk {
+      background: var(--plum-dark);
+      color: var(--cream);
+      box-shadow: 6px 6px 0 var(--red-death);
+    }
+    .window-bar {
+      background: linear-gradient(90deg, #ff7eb3, #ffb3d9);
+      border-bottom: 3px solid var(--plum-dark);
+      padding: 6px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'VT323', monospace;
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: var(--plum-dark);
+    }
+    .punk-bar { background: linear-gradient(90deg, var(--red-death), #7b0d1e); color: #fff; }
+    .window-btns button {
+      background: var(--cream);
+      border: 2px solid var(--plum-dark);
+      width: 22px;
+      height: 22px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 3px;
+    }
+    .window-body { padding: 18px; }
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+    .time-box {
+      background: var(--plum-dark);
+      color: var(--pink-light);
+      border: 2px solid var(--pink-hot);
+      padding: 12px 4px;
+    }
+    .time-box span {
+      font-family: 'VT323', monospace;
+      font-size: 2.6rem;
+      display: block;
+      line-height: 1;
+    }
+    .time-box label { font-size: 0.7rem; color: #fff; letter-spacing: 1px; }
+    .rage-zone {
+      margin-top: 18px;
+      padding: 16px 10px;
+      border: 2px dashed var(--pink-hot);
+      background: #fff0f6;
+      text-align: center;
+      position: relative;
+      min-height: 115px;
+      overflow: hidden;
+    }
+    .voucher-box { text-align: center; }
+    .voucher-title { font-weight: bold; color: var(--red-death); margin-bottom: 6px; font-size: 0.92rem; }
+    .progress-track {
+      width: 100%;
+      height: 20px;
+      background: #ffd6e8;
+      border: 2px solid var(--plum-dark);
+      margin: 14px 0 8px;
+      overflow: hidden;
+    }
+    #progress-fill {
+      height: 100%;
+      width: 0%;
+      background: repeating-linear-gradient(45deg, var(--pink-hot), var(--pink-hot) 10px, #ff7eb3 10px, #ff7eb3 20px);
+      transition: width 0.2s ease;
+    }
+    .typewriter-note { font-size: 0.85rem; margin-bottom: 12px; }
+    .pink-btn {
+      background: var(--pink-hot);
+      color: #fff;
+      border: 2.5px solid var(--plum-dark);
+      box-shadow: 3px 3px 0 var(--plum-dark);
+      padding: 10px 18px;
+      font-family: 'Space Mono', monospace;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    .pink-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--plum-dark); }
+    .small-btn { padding: 6px 12px; font-size: 0.78rem; }
+    #runaway-btn { position: relative; transition: left 0.15s ease, top 0.15s ease; }
+    .parrot-section { display: flex; align-items: center; gap: 16px; }
+    .parrot-avatar {
+      font-size: 3.6rem;
+      background: #2b1624;
+      border: 2px solid var(--pink-hot);
+      border-radius: 50%;
+      width: 82px;
+      height: 82px;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      user-select: none;
+      flex-shrink: 0;
+      transition: transform 0.15s;
+    }
+    .parrot-avatar:active { transform: scale(0.88) rotate(-12deg); }
+    .parrot-speech p { font-size: 0.9rem; color: var(--pink-light); margin-bottom: 6px; }
+    .parrot-speech small { color: #b58ea3; font-size: 0.72rem; }
+    .game-hud {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+    }
+    #game-arena {
+      height: 195px;
+      background: repeating-linear-gradient(45deg, #fff0f6, #fff0f6 10px, #ffe3ee 10px, #ffe3ee 20px);
+      border: 2.5px solid var(--plum-dark);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      text-align: center;
+    }
+    #game-status { font-size: 0.82rem; color: var(--plum-dark); font-weight: bold; }
+    #target-item {
+      position: absolute;
+      font-size: 2.3rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      user-select: none;
+    }
+    #game-roast { margin-top: 10px; color: var(--red-death); font-weight: bold; min-height: 20px; }
+    .pose-box { text-align: center; }
+    #pose-slider { width: 100%; accent-color: var(--pink-hot); margin: 8px 0; }
+    body.time-stop { filter: invert(1) hue-rotate(180deg); transition: filter 0.25s; }
+    #za-warudo-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 0, 25, 0.92);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .zawarudo-text {
+      font-family: 'Bangers', cursive;
+      font-size: 4.5rem;
+      color: var(--jojo-gold);
+      letter-spacing: 4px;
+      text-shadow: 5px 5px 0 var(--red-death);
+      animation: shake 0.15s infinite;
+    }
+    .zawarudo-sub { color: #fff; margin-top: 10px; font-size: 1rem; letter-spacing: 2px; }
+    @keyframes shake {
+      0% { transform: translate(2px, 2px); }
+      50% { transform: translate(-3px, -2px); }
+      100% { transform: translate(2px, -2px); }
+    }
+    #jojo-finale { max-width: 620px; margin: 0 auto; position: relative; z-index: 5; }
+    .menacing-bg {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--jojo-purple);
+      letter-spacing: 8px;
+      margin-bottom: 10px;
+      animation: shake 0.4s infinite;
+    }
+    .jojo-card {
+      background: linear-gradient(135deg, #240046, #10002b);
+      color: #fff;
+      border: 4px solid var(--jojo-gold);
+      box-shadow: 8px 8px 0 var(--pink-hot);
+      padding: 26px 20px;
+      text-align: center;
+    }
+    .jojo-badge {
+      display: inline-block;
+      background: var(--red-death);
+      color: #fff;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .jojo-headline {
+      font-family: 'Bangers', cursive;
+      font-size: 3.4rem;
+      color: var(--jojo-gold);
+      letter-spacing: 3px;
+      line-height: 1;
+      text-shadow: 4px 4px 0 var(--pink-hot);
+      margin-bottom: 14px;
+    }
+    .jojo-fakeout { font-size: 0.9rem; color: var(--pink-light); margin-bottom: 20px; }
+    .stand-box {
+      background: rgba(255, 255, 255, 0.08);
+      border: 2px solid var(--jojo-gold);
+      padding: 14px;
+      margin-bottom: 22px;
+      text-align: left;
+    }
+    .stand-header {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      border-bottom: 1px dashed var(--jojo-gold);
+      padding-bottom: 8px;
+      margin-bottom: 10px;
+      font-size: 0.82rem;
+      color: var(--jojo-gold);
+    }
+    .stand-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.78rem; }
+    .stand-stats div {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 6px 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .stand-stats strong { color: var(--pink-hot); }
+    .real-wish {
+      background: var(--cream);
+      color: var(--plum-dark);
+      border: 3px solid var(--pink-hot);
+      padding: 20px 16px;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .real-wish h2 { font-family: 'Playfair Display', serif; color: var(--pink-hot); margin-bottom: 8px; }
+    .real-wish p { font-size: 0.88rem; line-height: 1.6; }
+    .tbc-arrow {
+      display: inline-block;
+      background: #e9d8a6;
+      color: #1d1d1d;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: bold;
+      padding: 8px 22px;
+      clip-path: polygon(10% 0%, 100% 0%, 95% 50%, 100% 100%, 10% 100%, 0% 50%);
+      margin-bottom: 18px;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 12, 20, 0.75);
+      display: grid;
+      place-items: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal-box { max-width: 340px; width: 100%; text-align: center; }
+    .modal-box p { margin-bottom: 14px; font-size: 0.88rem; }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="bg-stickers" aria-hidden="true">
+    <span class="sticker s1">★</span>
+    <span class="sticker s2">ゴ</span>
+    <span class="sticker s3">🍟</span>
+    <span class="sticker s4">🦜</span>
+    <span class="sticker s5">ゴ</span>
+    <span class="sticker s6">🚗</span>
+  </div>
+
+  <div id="za-warudo-overlay" class="hidden">
+    <div class="zawarudo-text">ZA WARUDO!!</div>
+    <div class="zawarudo-sub">TOKI WO TOMARE! (TIME STOPPED, AGE DIDN'T)</div>
+  </div>
+
+  <main id="countdown-view" class="container">
+    <header class="scrapbook-header">
+      <div class="tape"></div>
+      <p class="mini-tag">★ CASE FILE: 25 NOV // BLACK STONES 707 EDITION ★</p>
+      <h1 class="title">Pritz's Bizarre<br><span>Birthday Countdown</span></h1>
+      <p class="subtitle">"Unna rage-bait panradhu dhaan en life-oda #1 hobby 😌💅"</p>
+    </header>
+
+    <section class="retro-window">
+      <div class="window-bar">
+        <span>⏳ pritz_getting_old.exe</span>
+        <div class="window-btns">
+          <button onclick="fakeClose()">_</button>
+          <button onclick="fakeClose()">□</button>
+          <button onclick="fakeClose()">✕</button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="timer-grid">
+          <div class="time-box"><span id="days">00</span><label>DAYS</label></div>
+          <div class="time-box"><span id="hours">00</span><label>HRS</label></div>
+          <div class="time-box"><span id="minutes">00</span><label>MINS</label></div>
+          <div class="time-box"><span id="seconds">00</span><label>SECS</label></div>
+        </div>
+        <div class="rage-zone" id="rage-zone">
+          <p id="rage-msg" class="typewriter-note">Wait panna mudiyalaya? Skip timer-ah click pannu 👇</p>
+          <button id="runaway-btn" class="pink-btn">⏩ Skip to Birthday</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="retro-window">
+      <div class="window-bar">
+        <span>🎟️ free_panipuri_fries_drive.exe</span>
+        <div class="window-btns"><button onclick="fakeClose()">✕</button></div>
+      </div>
+      <div class="window-body voucher-box">
+        <p class="voucher-title">🎁 VIP BIRTHDAY VOUCHER UNLOCKED!</p>
+        <p class="typewriter-note">Unlimited <strong>Pani Puri</strong> + <strong>French Fries</strong> + <strong>Long Drive</strong> 🚗🍟</p>
+        <button id="claim-voucher-btn" class="pink-btn">Claim Free Treat Now</button>
+        <div id="loading-wrap" class="hidden">
+          <div class="progress-track"><div id="progress-fill"></div></div>
+          <p id="loading-text" class="typewriter-note">Generating voucher... 0%</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="retro-window dark-punk">
+      <div class="window-bar punk-bar">
+        <span>🦜 parrot_roast_protocol.dll</span>
+        <div class="window-btns"><button onclick="fakeClose()">✕</button></div>
+      </div>
+      <div class="window-body parrot-section">
+        <div class="parrot-avatar" id="parrot-btn" title="Tap the parrot!">🦜</div>
+        <div class="parrot-speech">
+          <p id="parrot-text">"Enna paakura? Enna tap pannu, unna roast panren!"</p>
+          <small>(Tap the parrot for Tanglish truth bombs)</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="retro-window">
+      <div class="window-bar">
+        <span>🎮 MINI-GAME: SAVE THE FRIES & PANI PURI</span>
+        <div class="window-btns"><button onclick="fakeClose()">✕</button></div>
+      </div>
+      <div class="window-body">
+        <div class="game-hud">
+          <span>Score: <strong id="game-score">0</strong></span>
+          <span>Time: <strong id="game-time">15</strong>s</span>
+          <button id="start-game-btn" class="pink-btn small-btn">START GAME</button>
+        </div>
+        <div id="game-arena">
+          <div id="game-status">Tap 🍟 & 🥙 (+1) before they vanish! DON'T tap the 🦜 (-2)!</div>
+          <button id="target-item" class="hidden">🍟</button>
+        </div>
+        <p id="game-roast" class="typewriter-note"></p>
+      </div>
+    </section>
+
+    <section class="retro-window">
+      <div class="window-bar"><span>✨ jojo_pose_checker.exe</span></div>
+      <div class="window-body pose-box">
+        <p class="typewriter-note">Rate your own JoJo Pose aura (1 to 100):</p>
+        <input type="range" id="pose-slider" min="1" max="100" value="50" />
+        <p id="pose-verdict">Current Aura: <strong>50/100</strong> (Meh, try harder)</p>
+      </div>
+    </section>
+  </main>
+
+  <section id="jojo-finale" class="hidden">
+    <div class="menacing-bg">ゴゴゴゴゴゴゴゴ</div>
+    <div class="jojo-card">
+      <div class="jojo-badge">★ MENACING BIRTHDAY UNLOCKED ★</div>
+      <h1 class="jojo-headline">KONO PRITZ<br>BIRTHDAY DA!!</h1>
+      <p class="jojo-fakeout">
+        "You thought it was a soft pastel <em>Kimi ni Todoke</em> birthday wish...<br>
+        <strong>BUT IT WAS ME, VAYASU AAGIDUCHU!!</strong>"
+      </p>
+      <div class="stand-box">
+        <div class="stand-header">
+          <span>STAND MASTER: <strong>PRITZ</strong></span>
+          <span>STAND NAME: <strong>「PARROT PLATINUM」</strong></span>
+        </div>
+        <div class="stand-stats">
+          <div><span>JOJO POSE AURA</span><strong>S+</strong></div>
+          <div><span>PANI PURI & FRIES</span><strong>∞</strong></div>
+          <div><span>RAGE-BAIT TRIGGER</span><strong>0.01s</strong></div>
+          <div><span>PARROT OBEDIENCE</span><strong>0%</strong></div>
+        </div>
+      </div>
+      <div class="real-wish">
+        <div class="tape"></div>
+        <h2>Happy Birthday, Pritz!! 🎂🦜🍟🚗</h2>
+        <p>
+          Yare Yare Daze... oru vazhiya <strong>25 Nov</strong> vandhuduchu!
+          Unna rage-bait panradhu dhaan enaku ulagathulaye favourite vishayam,
+          aana adhuku apram namma <strong>pani puri, french fries</strong> saaptutu
+          <strong>drive</strong> poradhu dhaan best part.
+          Indha varushamum un aesthetic-um, un JoJo poses-um, un parrot-oda chaos-um
+          mass-ah irukkattum. Stay chaotic, stay iconic! 💀💖
+        </p>
+      </div>
+      <div class="tbc-arrow"><span>◀══ To Be Continued (Next Drive)</span></div>
+      <button id="replay-btn" class="pink-btn">↺ Back to Countdown / Mini-Game</button>
+    </div>
+  </section>
+
+  <div id="fake-modal" class="modal hidden">
+    <div class="retro-window modal-box">
+      <div class="window-bar punk-bar">
+        <span>⚠️ SYSTEM ERROR 404</span>
+        <button onclick="closeModal()">✕</button>
+      </div>
+      <div class="window-body">
+        <p id="modal-text">Close panna mudiyadhu ma! Rage-bait-ah muzhusa anubavichitu po 😤</p>
+        <button class="pink-btn small-btn" onclick="closeModal()">Fine 🙄</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TARGET_DATE = new Date("2026-11-25T00:00:00+05:30").getTime();
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minsEl = document.getElementById("minutes");
+    const secsEl = document.getElementById("seconds");
+    let finaleTriggered = false;
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = TARGET_DATE - now;
+      if (diff <= 0) {
+        daysEl.textContent = "00"; hoursEl.textContent = "00";
+        minsEl.textContent = "00"; secsEl.textContent = "00";
+        if (!finaleTriggered) triggerJojoFinale();
+        return;
+      }
+      daysEl.textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, "0");
+      hoursEl.textContent = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, "0");
+      minsEl.textContent = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, "0");
+      secsEl.textContent = String(Math.floor((diff / 1000) % 60)).padStart(2, "0");
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const runawayBtn = document.getElementById("runaway-btn");
+    const rageZone = document.getElementById("rage-zone");
+    const rageMsg = document.getElementById("rage-msg");
+    const rageLines = [
+      "Ayyo avasaram paaru! Wait pannu ma 😤",
+      "Unna rage-bait panradhu evlo fun-ah iruku theriyuma 😂",
+      "Haha miss aayiduchu! Try again JoJo poser 💅",
+      "Pani puri saapda kooda ivlo fast-ah kai pogadhu!",
+      "Seri seri, click pannita... aana SKIP AAGADHU 💀"
+    ];
+    let dodgeCount = 0;
+
+    function dodgeButton() {
+      if (dodgeCount < 5) {
+        const maxX = rageZone.clientWidth - runawayBtn.offsetWidth - 20;
+        const maxY = rageZone.clientHeight - runawayBtn.offsetHeight - 20;
+        runawayBtn.style.position = "absolute";
+        runawayBtn.style.left = Math.max(10, Math.floor(Math.random() * maxX)) + "px";
+        runawayBtn.style.top = Math.max(40, Math.floor(Math.random() * maxY)) + "px";
+        rageMsg.textContent = rageLines[dodgeCount % rageLines.length];
+        dodgeCount++;
+      } else {
+        showModal("Nice try Pritz! Time-ah skip panna nee onnum DIO illa. Wait till 25 Nov! ⏳💀");
+        dodgeCount = 0;
+        runawayBtn.style.position = "relative";
+        runawayBtn.style.left = "0"; runawayBtn.style.top = "0";
+      }
+    }
+    runawayBtn.addEventListener("mouseenter", dodgeButton);
+    runawayBtn.addEventListener("touchstart", (e) => { e.preventDefault(); dodgeButton(); });
+    runawayBtn.addEventListener("click", dodgeButton);
+
+    const claimBtn = document.getElementById("claim-voucher-btn");
+    const loadingWrap = document.getElementById("loading-wrap");
+    const progressFill = document.getElementById("progress-fill");
+    const loadingText = document.getElementById("loading-text");
+    let voucherInterval = null;
+
+    claimBtn.addEventListener("click", () => {
+      clearInterval(voucherInterval);
+      claimBtn.disabled = true;
+      loadingWrap.classList.remove("hidden");
+      let pct = 0;
+      voucherInterval = setInterval(() => {
+        pct = pct < 90 ? pct + 15 : pct + 3;
+        if (pct >= 99) {
+          progressFill.style.width = "99%";
+          loadingText.innerHTML =
+            "<strong>99%... ERROR!</strong> 😂 Unna rage-bait pannitu dhaan pani puri & fries vaangi tharuven. Drive-ku ready-ah iru, bill-ah paathukalam! 🚗🍟";
+          clearInterval(voucherInterval);
+          claimBtn.disabled = false;
+          claimBtn.textContent = "Try Again (Still Rage-Bait)";
+        } else {
+          progressFill.style.width = pct + "%";
+          loadingText.textContent = `Packing Pani Puri & French Fries... ${pct}%`;
+        }
+      }, 260);
+    });
+
+    const parrotBtn = document.getElementById("parrot-btn");
+    const parrotText = document.getElementById("parrot-text");
+    const parrotRoasts = [
+      "\"Pritz-uh, drive poyi pani puri & french fries mattum saapdra... enaku oru fry kooda illa! 🍟😤\"",
+      "\"Un friend-ku ulagathulaye favourite vishayam unna rage-bait panradhu dhaan... and nee every time maatikira! 😂\"",
+      "\"Mirror munnadi JoJo pose podradha niruthitu enna paaru ma!\"",
+      "\"Aesthetic collage-la NANA, Death Note-nu podra... aana pani puri paatha ella aesthetic-um kaali!\"",
+      "\"Drive poringa, fries saapdringa, aana birthday treat enga da?! 🚗\"",
+      "\"Stand Master Pritz-am... aana 2 seconds rage-bait panna udane BP yerudhu! 💀\""
+    ];
+    let roastIdx = 0;
+    parrotBtn.addEventListener("click", () => {
+      parrotText.textContent = parrotRoasts[roastIdx];
+      roastIdx = (roastIdx + 1) % parrotRoasts.length;
+    });
+
+    const startGameBtn = document.getElementById("start-game-btn");
+    const arena = document.getElementById("game-arena");
+    const targetItem = document.getElementById("target-item");
+    const gameStatus = document.getElementById("game-status");
+    const scoreEl = document.getElementById("game-score");
+    const timeEl = document.getElementById("game-time");
+    const gameRoast = document.getElementById("game-roast");
+    let score = 0, timeLeft = 15, gameInterval = null, moveInterval = null, currentType = "food";
+
+    function spawnItem() {
+      targetItem.style.left = Math.random() * (arena.clientWidth - 50) + "px";
+      targetItem.style.top = Math.random() * (arena.clientHeight - 50) + "px";
+      const roll = Math.random();
+      if (roll < 0.28) { currentType = "parrot"; targetItem.textContent = "🦜"; }
+      else if (roll < 0.64) { currentType = "food"; targetItem.textContent = "🍟"; }
+      else { currentType = "food"; targetItem.textContent = "🥙"; }
+    }
+
+    startGameBtn.addEventListener("click", () => {
+      clearInterval(gameInterval); clearInterval(moveInterval);
+      score = 0; timeLeft = 15;
+      scoreEl.textContent = score; timeEl.textContent = timeLeft;
+      gameRoast.textContent = "";
+      gameStatus.classList.add("hidden");
+      targetItem.classList.remove("hidden");
+      startGameBtn.disabled = true;
+      spawnItem();
+      moveInterval = setInterval(spawnItem, 780);
+      gameInterval = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(gameInterval); clearInterval(moveInterval);
+          targetItem.classList.add("hidden");
+          gameStatus.classList.remove("hidden");
+          startGameBtn.disabled = false;
+          if (score >= 10) {
+            gameStatus.textContent = `Score: ${score}! Certified Pani Puri & Fries Monster!`;
+            gameRoast.textContent = "Ok drive + fries confirmed... aana first konjam rage-bait pannuven 🚗🍟";
+          } else {
+            gameStatus.textContent = `Score: ${score}... Ayyo ivlo slow-ah?!`;
+            gameRoast.textContent = "Un parrot ella french fries-ayum thookitu pochu! 💀🦜";
+          }
+        }
+      }, 1000);
+    });
+
+    targetItem.addEventListener("click", () => {
+      if (currentType === "parrot") {
+        score = Math.max(0, score - 2);
+        gameRoast.textContent = "AYYO! Parrot-ah tap pannita (-2)! Rage-bait successful 😂";
+      } else {
+        score++; gameRoast.textContent = "";
+      }
+      scoreEl.textContent = score;
+      spawnItem();
+    });
+
+    const poseSlider = document.getElementById("pose-slider");
+    const poseVerdict = document.getElementById("pose-verdict");
+    poseSlider.addEventListener("input", () => {
+      const val = Number(poseSlider.value);
+      if (val > 80) {
+        poseVerdict.innerHTML = `Aura: <strong>${val}/100</strong> — Overconfidence udambuku aagadhu! Resetting...`;
+        setTimeout(() => {
+          poseSlider.value = 12;
+          poseVerdict.innerHTML = `Real Aura: <strong>12/100</strong> (Parrot approves this rating 🦜)`;
+        }, 650);
+      } else if (val < 30) {
+        poseVerdict.innerHTML = `Aura: <strong>${val}/100</strong> — Finally some honesty! 😂`;
+      } else {
+        poseVerdict.innerHTML = `Aura: <strong>${val}/100</strong> — Decent, aana Jotaro level illa.`;
+      }
+    });
+
+    const overlay = document.getElementById("za-warudo-overlay");
+    const countdownView = document.getElementById("countdown-view");
+    const jojoFinale = document.getElementById("jojo-finale");
+
+    function triggerJojoFinale() {
+      finaleTriggered = true;
+      document.body.classList.add("time-stop");
+      overlay.classList.remove("hidden");
+      setTimeout(() => {
+        document.body.classList.remove("time-stop");
+        overlay.classList.add("hidden");
+        countdownView.classList.add("hidden");
+        jojoFinale.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 2400);
+    }
+
+    document.getElementById("replay-btn").addEventListener("click", () => {
+      jojoFinale.classList.add("hidden");
+      countdownView.classList.remove("hidden");
+    });
+
+    function fakeClose() {
+      showModal("Indha window-ah close panna mudiyadhu! Rage-bait-ah muzhusa anubavichitu po 😤");
+    }
+    function showModal(msg) {
+      document.getElementById("modal-text").textContent = msg;
+      document.getElementById("fake-modal").classList.remove("hidden");
+    }
+    function closeModal() {
+      document.getElementById("fake-modal").classList.add("hidden");
+    }
+  </script>
+</body>
+</html>
